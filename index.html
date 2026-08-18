@@ -1,375 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samuel Irenikase — Agentic AI Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#0B1D33;
-    --navy-deep:#081526;
-    --amber:#E8A33D;
-    --paper:#EDEAE1;
-    --slate:#8B99AE;
-    --green:#4C9F70;
-    --line: rgba(237,234,225,0.12);
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--navy);
-    color:var(--paper);
-    font-family:'Inter', sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  .mono{font-family:'JetBrains Mono', monospace;}
-  a{color:inherit;}
-  ::selection{background:var(--amber); color:var(--navy-deep);}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- This meta line is what shows up when the link is pasted on WhatsApp/LinkedIn -->
+  <meta name="description" content="Irenikase Samuel Temitope — AI/ML Engineer. Six projects, three ML, three LLM, all evaluated." />
+  <title>Irenikase Samuel Temitope — AI/ML Engineer</title>
 
-  /* background grid texture */
-  .grid-bg{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-  }
-
-  .wrap{max-width:840px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
-
-  .stage-label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    letter-spacing:0.12em;
-    color:var(--amber);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:28px;
-  }
-  .stage-label::before{content:"";width:8px;height:8px;background:var(--amber);border-radius:50%;
-    box-shadow:0 0 8px var(--amber);}
-
-  section{padding:96px 0;}
-  section:first-of-type{padding-top:0;}
-
-  /* HERO */
-  header{min-height:92vh; display:flex; flex-direction:column; justify-content:center; padding:64px 0;}
-  .eyebrow{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--slate); letter-spacing:0.15em; margin-bottom:18px;}
-  h1{
-    font-family:'Inter', sans-serif;
-    font-weight:700;
-    font-size:clamp(38px, 6vw, 60px);
-    line-height:1.05;
-    letter-spacing:-0.02em;
-    margin-bottom:14px;
-  }
-  .role-line{font-size:clamp(17px,2.4vw,21px); color:var(--slate); margin-bottom:40px; max-width:560px;}
-  .role-line b{color:var(--paper); font-weight:600;}
-
-  .terminal{
-    background:var(--navy-deep);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:22px 24px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:14px;
-    max-width:560px;
-    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
-  }
-  .terminal .bar{display:flex; gap:6px; margin-bottom:16px;}
-  .terminal .dot{width:9px;height:9px;border-radius:50%;background:var(--line);}
-  #log-line{white-space:pre-wrap; color:var(--paper); min-height:120px;}
-  #log-line .prompt{color:var(--green);}
-  #log-line .val{color:var(--amber);}
-  .cursor{display:inline-block; width:7px; height:15px; background:var(--amber); vertical-align:-2px; animation:blink 1s step-start infinite;}
-  @keyframes blink{50%{opacity:0;}}
-
-  .hero-links{display:flex; gap:22px; margin-top:32px; flex-wrap:wrap;}
-  .hero-links a{
-    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--slate);
-    border-bottom:1px solid var(--line); padding-bottom:3px; transition:color .15s, border-color .15s;
-  }
-  .hero-links a:hover{color:var(--amber); border-color:var(--amber);}
-
-  h2.section-title{
-    font-size:clamp(24px,3vw,30px); font-weight:700; letter-spacing:-0.01em; margin-bottom:36px;
-  }
-
-  /* EXPERIENCE */
-  .role{
-    border-left:2px solid var(--line);
-    padding:4px 0 28px 26px;
-    position:relative;
-    margin-bottom:8px;
-  }
-  .role::before{
-    content:""; position:absolute; left:-6px; top:8px; width:10px; height:10px;
-    border-radius:50%; background:var(--navy); border:2px solid var(--amber);
-  }
-  .role:last-child{padding-bottom:4px;}
-  .role-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:4px;}
-  .role-title{font-weight:600; font-size:18px;}
-  .role-time{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--slate);}
-  .role-org{color:var(--slate); font-size:14px; font-style:italic; margin-bottom:10px;}
-  .role ul{padding-left:18px; color:var(--paper); font-size:15px;}
-  .role li{margin-bottom:6px; color:#d8d5cb;}
-
-  /* PROJECTS */
-  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
-  @media (max-width:640px){.proj-grid{grid-template-columns:1fr;}}
-  .card{
-    background:rgba(237,234,225,0.03);
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:22px;
-    transition:border-color .15s, transform .15s;
-  }
-  .card:hover{border-color:rgba(232,163,61,0.5); transform:translateY(-2px);}
-  .card-top{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; gap:10px;}
-  .card h3{font-size:16px; font-weight:600;}
-  .tag{
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em;
-    padding:3px 8px; border-radius:20px; white-space:nowrap; text-transform:uppercase;
-  }
-  .tag.active{background:rgba(76,159,112,0.15); color:var(--green); border:1px solid rgba(76,159,112,0.4);}
-  .tag.ongoing{background:rgba(232,163,61,0.15); color:var(--amber); border:1px solid rgba(232,163,61,0.4);}
-  .card p{font-size:14px; color:var(--slate); line-height:1.6;}
-
-  /* SKILLS */
-  .skill-groups{display:grid; grid-template-columns:1fr 1fr; gap:28px 40px;}
-  @media (max-width:640px){.skill-groups{grid-template-columns:1fr;}}
-  .skill-group h4{
-    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--amber);
-    letter-spacing:0.08em; margin-bottom:12px; text-transform:uppercase;
-  }
-  .pill-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .pill{
-    font-size:13px; padding:6px 12px; border-radius:6px;
-    background:rgba(237,234,225,0.05); border:1px solid var(--line); color:#d8d5cb;
-  }
-
-  /* LEARNING TICKER */
-  .learn-row{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;}
-  .learn-row:last-child{border-bottom:none;}
-  .learn-name{color:var(--paper);}
-  .learn-src{color:var(--slate); font-family:'JetBrains Mono',monospace; font-size:12px;}
-
-  /* CONNECT */
-  footer{padding:96px 0 64px;}
-  .connect-grid{display:flex; flex-wrap:wrap; gap:14px; margin-top:28px;}
-  .btn{
-    font-family:'JetBrains Mono',monospace; font-size:13px;
-    padding:12px 20px; border-radius:6px; border:1px solid var(--line);
-    transition:border-color .15s, background .15s;
-  }
-  .btn.primary{background:var(--amber); color:var(--navy-deep); border-color:var(--amber); font-weight:700;}
-  .btn.primary:hover{background:#f0b25c;}
-  .btn:not(.primary):hover{border-color:var(--amber); color:var(--amber);}
-  .foot-note{margin-top:56px; color:var(--slate); font-size:12.5px; font-family:'JetBrains Mono',monospace;}
-
-  @media (max-width:600px){
-    section{padding:64px 0;}
-    header{min-height:auto; padding:56px 0 48px;}
-  }
-</style>
+  <!-- style.css holds ALL the visual design. script.js holds ALL the behaviour. -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="grid-bg"></div>
 
-<div class="wrap">
+  <!-- ================= NAV BAR (sticky on top) ================= -->
+  <nav class="nav" id="topnav">
+    <div class="nav-inner">
+      <!-- Left: short name -->
+      <a class="brand" href="#top">Samuel Temitope</a>
 
-  <header>
-    <div class="eyebrow">// portfolio.init()</div>
-    <h1>Samuel Temitope<br>Irenikase</h1>
-    <p class="role-line">AI/ML Engineer building <b>agentic and LLM-powered systems</b> — agent orchestration, RAG, and production ML pipelines shipped end to end.</p>
+      <!-- Right: links. The button is only visible on small screens. -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <!-- TODO: put your real resume file in the same folder, or link to a Google Drive / PDF URL -->
+        <li><a class="nav-cta" href="https://github.com/srdataml-droid/portfolio/blob/main/CV.md" target="_blank" rel="noopener">Resume</a></li>
+      </ul>
 
-    <div class="terminal">
-      <div class="bar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-      <div id="log-line"></div>
+      <!-- Hamburger button (mobile). The JS toggles the menu. -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <div class="hero-links">
-      <a href="mailto:samuelirenikase@gmail.com">samuelirenikase@gmail.com</a>
-      <a href="tel:+2347061313517">+234 706 131 3517</a>
-      <a href="https://www.linkedin.com/in/samuel-irenikase-582954364" target="_blank" rel="noopener">linkedin</a>
-      <a href="https://github.com/srdataml-droid" target="_blank" rel="noopener">github</a>
+  <!-- ================= HERO — the top section people see first ================= -->
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <!-- TODO: put your photo as photo.jpg in this folder, then uncomment the img tag.
+           Or delete the img tag entirely if you don't want a photo. -->
+      <!--
+      <img class="hero-photo" src="photo.jpg" alt="Portrait of Samuel Temitope" />
+      -->
+      <h1>Irenikase Samuel Temitope</h1>
+      <p class="hero-role">AI / Machine Learning Engineer — Intern / Junior</p>
+      <p class="hero-tag">
+        Based in Lagos, Nigeria · Open to <strong>remote roles worldwide</strong>,
+        any time zone · 6 projects, 3 ML + 3 LLM, every result reproducible
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:samuelirenikase@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://github.com/srdataml-droid" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </header>
 
-  <section id="build">
-    <div class="stage-label">[ BUILD ] — experience</div>
-    <h2 class="section-title">Where the systems get shipped</h2>
-
-    <div class="role">
-      <div class="role-top">
-        <span class="role-title">AI/ML Engineer II — Revluma</span>
-        <span class="role-time">present</span>
-      </div>
-      <div class="role-org">Early-stage startup (pre-launch) — AI-powered shopper-behavior prediction for eCommerce merchants</div>
-      <ul>
-        <li>Own the Python ML backend: feature engineering pipeline, model stubs, MLflow experiment tracking.</li>
-        <li>Built the FastAPI serving layer that exposes model predictions to the rest of the product.</li>
-        <li>Collaborate with a cross-functional team on feature vector design and behavioral-scoring logic.</li>
-      </ul>
-    </div>
-
-    <div class="role">
-      <div class="role-top">
-        <span class="role-title">Founder &amp; AI/ML Engineer — Novaxis</span>
-        <span class="role-time">2024 — present</span>
-      </div>
-      <div class="role-org">AI, ML &amp; software automation studio focused on African markets</div>
-      <ul>
-        <li>Lead technical direction and hands-on development across AI/ML and automation projects for African markets.</li>
-      </ul>
-    </div>
-
-    <div class="role">
-      <div class="role-top">
-        <span class="role-title">AI Engineering Simulation — Tata iQ (Forage)</span>
-        <span class="role-time">2025</span>
-      </div>
-      <ul>
-        <li>Built the Geldium AI Collections System end-to-end: a Random Forest classifier for collections risk scoring served through a FastAPI backend.</li>
-        <li>Developed an autonomous AI agent integrated with the Google Gemini API to generate collection actions and email notifications without manual intervention.</li>
-        <li>Containerized with Docker, scheduled with GitHub Actions, deployed to Render and Railway.</li>
-      </ul>
+  <!-- ================= ABOUT ================= -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <h2 class="reveal">About</h2>
+      <p>
+        I build machine-learning and LLM systems end to end: clean and check the
+        data, train a model, serve it over an API, and — most importantly —
+        evaluate it with a score that can actually fail. Every number on this
+        page is measured and reproducible from a committed report.
+      </p>
+      <p>
+        OND Computer Science (Yaba College of Technology) plus self-directed
+        study. I work fully remote from Nigeria and structure my day around the
+        team's time zone.
+      </p>
     </div>
   </section>
 
-  <section id="run">
-    <div class="stage-label">[ RUN ] — projects</div>
-    <h2 class="section-title">What's currently executing</h2>
-
-    <div class="proj-grid">
-
-      <div class="card">
-        <div class="card-top"><h3>LangChain Agent &amp; Chatbot</h3></div>
-        <p>Built a LangChain chatbot and worked through agent architecture fundamentals — tool selection via tool descriptions, Pydantic-based structured outputs, and the LCEL pipeline pattern. Includes a constrained, safe Wikipedia-search tool for agent use.</p>
+  <!-- ================= SKILLS ================= -->
+  <section class="section section-alt" id="skills">
+    <div class="section-inner">
+      <h2 class="reveal">Skills</h2>
+      <div class="skills-grid">
+        <!-- Each <div class="skill-card"> is one group. Add/remove freely. -->
+        <div class="skill-card">
+          <h3>Core ML</h3>
+          <p>Python · pandas · NumPy · scikit-learn · gradient boosting · regression · classification</p>
+        </div>
+        <div class="skill-card">
+          <h3>LLM / AI Engineering</h3>
+          <p>RAG with citations · tool-calling agents · structured extraction · prompt evaluation</p>
+        </div>
+        <div class="skill-card">
+          <h3>MLOps</h3>
+          <p>FastAPI serving · time-based validation · model drift (PSI) · backtesting</p>
+        </div>
+        <div class="skill-card">
+          <h3>Engineering</h3>
+          <p>git · SQL (SQLite, read-only agents) · unittest (299 tests) · Linux</p>
+        </div>
       </div>
-
-      <div class="card">
-        <div class="card-top"><h3>Geldium AI Collections</h3></div>
-        <p>Autonomous collections agent: Random Forest risk model, FastAPI backend, Gemini-powered agent for action generation, Dockerized and deployed to Render/Railway.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-top"><h3>AgriScan</h3><span class="tag ongoing">ongoing</span></div>
-        <p>Crop disease classifier for African farmers using MobileNetV2 transfer learning on the PlantVillage dataset (TensorFlow/Keras).</p>
-      </div>
-
-      <div class="card">
-        <div class="card-top"><h3>TrustLens</h3><span class="tag ongoing">ongoing</span></div>
-        <p>Risk-based fraud detection concept for Nigerian banking apps with a user-facing transparency dashboard. Pitched at a Union Bank-sponsored hackathon.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-top"><h3>FinanceFlow</h3><span class="tag active">active</span></div>
-        <p>Web-based personal finance tracker — React, TypeScript, Tailwind, Recharts. Final-year group project.</p>
-      </div>
-
     </div>
   </section>
 
-  <section id="tools">
-    <div class="stage-label">[ TOOLS ] — stack</div>
-    <h2 class="section-title">What's loaded</h2>
+  <!-- ================= PROJECTS ================= -->
+  <section class="section" id="projects">
+    <div class="section-inner">
+      <h2 class="reveal">Projects</h2>
+      <p class="section-note">
+        Six projects. Each has a baseline it has to beat, an evaluation that can
+        fail, and a README that says what the numbers do not cover.
+      </p>
 
-    <div class="skill-groups">
-      <div class="skill-group">
-        <h4>Languages &amp; frameworks</h4>
-        <div class="pill-row">
-          <span class="pill">Python</span><span class="pill">FastAPI</span><span class="pill">LangChain</span><span class="pill">Go</span><span class="pill">SQL</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h4>ML / AI</h4>
-        <div class="pill-row">
-          <span class="pill">scikit-learn</span><span class="pill">TensorFlow/Keras</span><span class="pill">MLflow</span><span class="pill">RAG</span><span class="pill">Agent orchestration</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h4>Infrastructure</h4>
-        <div class="pill-row">
-          <span class="pill">Docker</span><span class="pill">GitHub Actions</span><span class="pill">Git</span><span class="pill">Linux (Fedora)</span><span class="pill">Render</span><span class="pill">Railway</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h4>APIs &amp; platforms</h4>
-        <div class="pill-row">
-          <span class="pill">Gemini API</span><span class="pill">Anthropic API</span><span class="pill">Ollama</span>
-        </div>
-      </div>
-    </div>
+      <!-- PROJECT CARDS. Each card is one project.
+           The "highlight" number is the single number to remember for that project. -->
+      <div class="cards">
 
-    <div style="margin-top:48px;">
-      <h4 class="mono" style="font-size:12px; color:var(--amber); letter-spacing:0.08em; margin-bottom:14px; text-transform:uppercase;">Continuous learning</h4>
-      <div class="learn-row"><span class="learn-name">Neural Networks: Zero to Hero</span><span class="learn-src">Andrej Karpathy — YouTube</span></div>
-      <div class="learn-row"><span class="learn-name">CS50</span><span class="learn-src">Harvard — YouTube</span></div>
-      <div class="learn-row"><span class="learn-name">Web Development</span><span class="learn-src">Angela Yu — Udemy</span></div>
-      <div class="learn-row"><span class="learn-name">Full-stack curriculum</span><span class="learn-src">freeCodeCamp</span></div>
+        <article class="card">
+          <div class="card-body">
+            <h3>Trip ETA Predictor</h3>
+            <p class="card-type">ML · regression + serving API</p>
+            <p class="card-highlight">MAE 2.80 min — 48.5% better than baseline</p>
+            <p>Gradient-boosted duration prediction on 52k NYC taxi trips with leakage-safe features, time-based split, and a FastAPI endpoint measured at 9.2 ms.</p>
+          </div>
+          <a class="card-link" href="https://github.com/srdataml-droid/trip-eta-predictor" target="_blank">Repository →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <h3>Week-Ahead Demand Forecaster</h3>
+            <p class="card-type">ML · time series + backtest</p>
+            <p class="card-highlight">MAE 57.03 — 21.6% below seasonal naive</p>
+            <p>Hourly demand forecasting with horizon-safe features enforced by a test and a rolling-origin backtest across eight weekly origins.</p>
+          </div>
+          <a class="card-link" href="https://github.com/srdataml-droid/demand-forecaster" target="_blank">Repository →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <h3>Fraud Risk Scorer</h3>
+            <p class="card-type">ML · imbalanced classification</p>
+            <p class="card-highlight">PR-AUC 0.75 · 55.1% cheaper than reviewing everything</p>
+            <p>284k transactions, 0.17% fraud. Threshold set by money, not 0.5; cost curve solved exactly; drift monitored with PSI.</p>
+          </div>
+          <a class="card-link" href="https://github.com/srdataml-droid/fraud-risk-scorer" target="_blank">Repository →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <h3>Documentation RAG Service</h3>
+            <p class="card-type">LLM · retrieval, citations, refusal</p>
+            <p class="card-highlight">hit@3 0.896 · 95% grounded · 0 invalid citations</p>
+            <p>Answers questions from documents with verifiable citations, refuses when the answer is absent, and measures refusal behaviour both ways.</p>
+          </div>
+          <a class="card-link" href="https://github.com/srdataml-droid/docs-rag-service" target="_blank">Repository →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <h3>Job Advert Extractor</h3>
+            <p class="card-type">LLM · schema-constrained extraction</p>
+            <p class="card-highlight">mean 0.852 per-field vs 0.509 for "say unknown"</p>
+            <p>Turns free-text adverts into validated records. Pydantic schema is the contract; violations trigger one repair round, and repair rate is measured.</p>
+          </div>
+          <a class="card-link" href="https://github.com/srdataml-droid/job-extractor" target="_blank">Repository →</a>
+        </article>
+
+        <article class="card">
+          <div class="card-body">
+            <h3>SQL Agent</h3>
+            <p class="card-type">LLM · guarded tool-calling</p>
+            <p class="card-highlight">execution accuracy 0.941 (16/17)</p>
+            <p>Writes and runs SQL safely with three defence layers: read-only connection, a guard that makes refusals legible, and a six-step loop budget.</p>
+          </div>
+          <a class="card-link" href="https://github.com/srdataml-droid/sql-agent" target="_blank">Repository →</a>
+        </article>
+
+      </div>
     </div>
   </section>
 
-  <footer id="connect">
-    <div class="stage-label">[ CONNECT ] — reach out</div>
-    <h2 class="section-title">status: open to opportunities</h2>
-    <p style="color:var(--slate); max-width:480px;">Looking for an Agentic AI Engineer Co-Op / internship where I can build production agent systems, not just prototype them.</p>
-
-    <div class="connect-grid">
-      <a class="btn primary" href="mailto:samuelirenikase@gmail.com">Email me</a>
-      <a class="btn" href="https://www.linkedin.com/in/samuel-irenikase-582954364" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/srdataml-droid" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="tel:+2347061313517">+234 706 131 3517</a>
+  <!-- ================= HOW I WORK ================= -->
+  <section class="section section-alt" id="work">
+    <div class="section-inner">
+      <h2 class="reveal">How I Work</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Baseline first</h3>
+          <p>A score with nothing to compare it to is not a result. Where the simple baseline wins, I report that too.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Evaluation that can fail</h3>
+          <p>Time-based splits, held-out labels, and the metric the user cares about — not the one that's easy to compute.</p>
+        </div>
+        <div class="skill-card">
+          <h3>Limits written down</h3>
+          <p>Every README says what the numbers do not cover. 299 tests across the portfolio, none touching the network.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="foot-note">Lagos, Nigeria — last updated 2026</div>
+  <!-- ================= CONTACT ================= -->
+  <footer class="section footer" id="contact">
+    <div class="section-inner">
+      <h2 class="reveal">Contact</h2>
+      <p>Remote is the opportunity, not a compromise. Happy to overlap US/EU hours.</p>
+      <p class="footer-links">
+        <!-- TODO: fill in your real links -->
+        <a href="mailto:samuelirenikase@gmail.com">samuelirenikase@gmail.com</a> ·
+        <a href="https://github.com/srdataml-droid" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://github.com/srdataml-droid/portfolio/blob/main/CV.md" target="_blank" rel="noopener">Resume</a>
+      </p>
+      <p class="footer-small">Built with plain HTML, CSS and JavaScript · <span id="year"></span></p>
+    </div>
   </footer>
 
-</div>
-
-<script>
-  const lines = [
-    { p: "&gt; ", t: "agent.init(name=\\"Samuel Irenikase\\")", v: false },
-    { p: "&gt; ", t: "loading tools", v: false },
-    { p: "  ", t: "[langchain, fastapi, mlflow, docker]", v: true },
-    { p: "&gt; ", t: "connecting endpoints", v: false },
-    { p: "  ", t: "[gemini-api, anthropic-api]", v: true },
-    { p: "&gt; ", t: "status: ready", v: true },
-  ];
-
-  const el = document.getElementById('log-line');
-  let out = "";
-
-  function typeLine(i, cb){
-    if(i >= lines.length){ cb(); return; }
-    const line = lines[i];
-    const full = line.p + line.t;
-    let j = 0;
-    const iv = setInterval(() => {
-      j++;
-      const partial = full.slice(0, j);
-      renderPartial(out, partial, line.v);
-      if(j >= full.length){
-        clearInterval(iv);
-        out += (line.v ? `<span class="val">${line.t}</span>` : line.t) + "\\n";
-        el.innerHTML = out + '<span class="cursor"></span>';
-        setTimeout(() => typeLine(i+1, cb), 220);
-      }
-    }, 16);
-  }
-
-  function renderPartial(prevOut, partial, isVal){
-    el.innerHTML = prevOut + (isVal ? `<span class="val">${partial}</span>` : partial) + '<span class="cursor"></span>';
-  }
-
-  typeLine(0, () => {});
-</script>
-
+  <!-- script.js is loaded at the bottom so the page paints first. -->
+  <script src="script.js"></script>
 </body>
 </html>
