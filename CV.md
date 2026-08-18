@@ -1,10 +1,10 @@
 # Irenikase Samuel Temitope
 
 **AI / Machine Learning Engineer** · Intern / Junior
-Based in Lagos, Nigeria · **Open to remote roles worldwide (any time zone)**
+Lagos, Nigeria · **Remote across US and EU hours · Open to relocation**
 
 `samuelirenikase@gmail.com` · [github.com/srdataml-droid](https://github.com/srdataml-droid) · [LinkedIn](https://www.linkedin.com/in/samuel-irenikase-582954364/)
-· [Portfolio](https://srdataml-droid.github.io/portfolio/)
+· [Portfolio](https://srdataml-droid.github.io/portfolio/) · [This CV as a Google Doc](https://docs.google.com/document/d/1k2fUmCdOsNGqyiEAIuxk3O4o-Ut9y8DoKeWYmRsd2B4/edit)
 
 ---
 
@@ -113,9 +113,9 @@ engineering; completed alongside the portfolio above.
 
 ## Availability & working style
 
-- **Remote is the opportunity, not a compromise.** I work fully remote from
-  Nigeria with a stable connection, and I structure my day around the team's
-  time zone, so full overlap with US/EU working hours is not a problem
+- **Remote is the opportunity, not a compromise.** I work fully remote with a
+  stable connection, and I structure my day around the team's time zone, so
+  full overlap with US/EU working hours is not a problem
 - Used to async work: clear written updates, committed reproducible
   experiments, and owning a task end to end
 - Every project ships with its tests and a reproducibility path. "It worked
