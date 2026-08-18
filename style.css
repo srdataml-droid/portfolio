@@ -1,15 +1,15 @@
 /* =====================================================================
-   Portfolio stylesheet — plain CSS, no framework.
+   Portfolio stylesheet: plain CSS, no framework.
    Read top to bottom. Change the :root variables to re-theme the site.
    ===================================================================== */
 
 /* The :root block is where ALL the colors live. Change one value here and
    it updates everywhere it's used. This is called "CSS variables". */
 :root {
-  --bg: #0f1115;            /* page background — near black */
+  --bg: #0f1115;            /* page background, near black */
   --bg-alt: #171a21;        /* slightly lighter background (alt sections) */
   --card: #1d212b;          /* project card background */
-  --text: #e8eaed;          /* main text — off white */
+  --text: #e8eaed;          /* main text, off white */
   --muted: #9aa3b2;         /* secondary text */
   --accent: #4f8cff;        /* blue accent for links and highlights */
   --accent-dark: #3861c9;
@@ -84,7 +84,7 @@ a:hover {
   padding: 6px 14px;
 }
 
-/* Hamburger button — hidden on wide screens, shown on phones */
+/* Hamburger button: hidden on wide screens, shown on phones */
 .nav-toggle {
   display: none;
   background: none;
@@ -227,7 +227,7 @@ a:hover {
   justify-content: space-between;
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
-/* Subtle lift on hover — makes the cards feel interactive */
+/* Subtle lift on hover, so the cards feel interactive */
 .card:hover {
   transform: translateY(-3px);
   border-color: var(--accent);

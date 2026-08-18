@@ -1,4 +1,4 @@
-# Portfolio — Irenikase Samuel Temitope
+# Portfolio: Irenikase Samuel Temitope
 
 AI / Machine Learning Engineer, Lagos. Live at
 **https://srdataml-droid.github.io/portfolio/**

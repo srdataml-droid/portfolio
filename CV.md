@@ -11,10 +11,10 @@ Based in Lagos, Nigeria · **Open to remote roles worldwide (any time zone)**
 ## Profile
 
 AI/ML engineer with an OND in Computer Science (Yaba College of Technology) and
-six end-to-end projects — three machine-learning and three LLM-engineering —
+six end-to-end projects (three machine-learning, three LLM-engineering),
 each built, served over an API and scored with an evaluation that can actually
 fail. Every number on this CV is measured and reproducible from the committed
-report in the linked repository — all six are public and MIT-licensed. Comfortable across the full loop a
+report in the linked repository. All six are public and MIT-licensed. Comfortable across the full loop a
 junior role asks for: data cleaning and leakage control, model building,
 evaluation design, serving via FastAPI, and LLM/agent engineering with
 citations, structured output and safety guards.
@@ -53,7 +53,7 @@ Two years of hourly bike-share rentals. Reindexed 165 missing hours as real
 zeros, built features that only use data at least 168 hours old (enforced by a
 test), and evaluated with a rolling-origin backtest over eight weekly origins:
 **MAE 57.03 (21.6% below seasonal naive), winning all eight weeks**. Reports
-the three weeks a simple baseline won too — after a hurricane broke the series.
+the three weeks a simple baseline won too, after a hurricane broke the series.
 
 ### 3. Fraud Risk Scorer
 *imbalanced classification with cost decisions*
@@ -90,8 +90,8 @@ attempt, none failed. Error analysis is read off committed predictions.
 Answers questions about a database by writing and running SQL, with three
 defence layers: a read-only connection (SQLite `mode=ro` + authorizer
 whitelist), a guard that turns refusals into legible messages and caps rows,
-and a six-step loop budget. Evaluated by **execution accuracy — 0.941 (16/17
-answerable questions)** — with all three safety attacks refused and the
+and a six-step loop budget. Evaluated by **execution accuracy: 0.941 (16/17
+answerable questions)**, with all three safety attacks refused and the
 database checksum unchanged. The benchmark itself was debugged: exact-tuple
 comparison was failing six correct answers, so scoring was rebuilt.
 
@@ -115,8 +115,8 @@ engineering; completed alongside the portfolio above.
 
 - **Remote is the opportunity, not a compromise.** I work fully remote from
   Nigeria with a stable connection, and I structure my day around the team's
-  time zone — full overlap with US/EU working hours is not a problem
+  time zone, so full overlap with US/EU working hours is not a problem
 - Used to async work: clear written updates, committed reproducible
   experiments, and owning a task end to end
-- Every project ships with its tests and a reproducibility path — "it worked
+- Every project ships with its tests and a reproducibility path. "It worked
   on my machine" is not a standard I find acceptable

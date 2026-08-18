@@ -1,5 +1,5 @@
 // =====================================================================
-// Portfolio behaviour — plain JavaScript, no libraries.
+// Portfolio behaviour: plain JavaScript, no libraries.
 // Three small jobs:
 //   1. Mobile menu (hamburger) open/close
 //   2. Close the menu when a nav link is clicked
@@ -12,7 +12,7 @@ const toggle = document.getElementById("nav-toggle");
 const links = document.getElementById("nav-links");
 
 // Clicking the hamburger adds/removes the "open" class.
-// CSS (.nav-links.open) decides how it looks — JS only flips the class.
+// CSS (.nav-links.open) decides how it looks; JS only flips the class.
 if (toggle && links) {
   toggle.addEventListener("click", () => {
     links.classList.toggle("open");
