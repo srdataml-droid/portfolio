@@ -55,6 +55,48 @@ That is the difference between the two stretches. The first proved I could
 measure. The second put something in front of people who are not me, and kept
 it running.
 
+## Other things worth opening
+
+Not everything is on the CV. These are on GitHub and some of them are among the
+better things I have built.
+
+**[trustlane](https://github.com/srdataml-droid/trustlane)** — an agentic KYC
+pipeline. It reads a submitted identity document, decides for itself which
+further checks are worth running, and returns APPROVE / REVIEW / REJECT with
+every reason recorded: a learned risk prior adjusted by rules that are each
+individually capped, so no hand-written rule can quietly overrule the model.
+**PR-AUC 0.8651 against 0.7633 for rules alone**, on 6,000 applications at 6%
+fraud, split chronologically so an identifier's later reuse cannot inform its
+earlier one.
+
+Two things about it I would rather say than have found: it is evaluated on
+**synthetic** data, because real identity documents cannot go in a public repo,
+which makes it weaker evidence than the projects above. And the honest result is
+split — the model ranks materially better than rules, and at the operating point
+that actually ships, it costs more. Both halves are in the README.
+
+**[jobscout](https://github.com/srdataml-droid/jobscout)** — finds remote AI and
+data roles a Nigeria-based junior can actually get, ranks them against a written
+profile, and names the skills the market keeps asking for that the profile does
+not have. Four public job APIs, no keys, no accounts. TF-IDF and logistic
+regression, trained in under a second, about 210 MB peak memory, never touches a
+GPU. The geography gate is the brutal one: on the last run it cut 595 postings to
+47. The 92% cross-validated accuracy flatters it, and the README says why.
+
+**[Geldium AI collections system](https://github.com/srdataml-droid/AI_powered_collections_system_strategy_deck)**
+— built for the Tata iQ AI Transformation virtual experience. Geldium Finance is
+a fictional client with a real problem: by the time collections notices someone
+is in trouble, it is too late to help them. 500 customers, 18 columns, predicting
+who is about to go delinquent and what intervention fits each one. It did not
+stop at the deck — the repo carries the trained model, an agent, a notifier and a
+scheduler, containerised and deployed.
+
+**[langchain_answer-solver](https://github.com/srdataml-droid/langchain_answer-solver)**
+— a tool-calling research agent over LangChain: DuckDuckGo and Wikipedia as
+tools, a pydantic schema forcing the answer into topic, summary, sources and
+tools used, and swappable providers behind it. Earlier work than the rest of this
+page, and it shows — no README and no evaluation yet.
+
 ## What changed in how I work
 
 Shipping something a business depends on teaches things a dataset cannot:
@@ -89,5 +131,8 @@ so changing what the site claims never means editing layout.
 
 - A 3D portrait for the hero — the slot is built, the render is not.
 - A live "try it" demo for one of the LLM projects, behind FastAPI.
-- The three projects not yet written up as case studies on the new site:
+- The three of the six not yet written up as case studies on the new site:
   the demand forecaster, the docs RAG service and the job extractor.
+- A README and an evaluation for `langchain_answer-solver`.
+- Trustlane and JobScout deserve case studies on the site too; right now they
+  are only listed here.
