@@ -116,6 +116,12 @@ function Card({ project }: { project: Project }) {
           </div>
         ) : null}
       </div>
+
+      {project.caveat ? (
+        <p className="m-0 mt-5 text-[13px] font-light leading-relaxed text-faint [text-wrap:pretty]">
+          {project.caveat}
+        </p>
+      ) : null}
     </article>
   );
 }
@@ -143,8 +149,8 @@ export function Work() {
 
       <Reveal className="mt-10 flex items-center gap-5" delay={0.1}>
         <span className="text-sm font-light text-faint [text-wrap:pretty]">
-          Three more &mdash; a demand forecaster, a documentation RAG service and a job-advert
-          extractor &mdash; live on GitHub.
+          More on GitHub &mdash; a trip-ETA service, a demand forecaster, a documentation RAG
+          service, a job-advert extractor and an AI collections system.
         </span>
         <div className="hidden h-px flex-1 bg-line sm:block" />
       </Reveal>

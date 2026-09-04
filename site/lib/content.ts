@@ -84,6 +84,12 @@ export type Project = {
    * per-category starting prices, not estimated.
    */
   priceFromNaira?: number;
+  /**
+   * Where this project's own numbers stop being trustworthy, in its author's
+   * words. Rendered under the card. Several of these READMEs say it plainly
+   * and the card would be worse for leaving it out.
+   */
+  caveat?: string;
   /** Rendered as a two-bar comparison beneath the stats when present. */
   comparison?: {
     caption: string;
@@ -112,8 +118,27 @@ export const projects: Project[] = [
     priceFromNaira: 25000,
   },
   {
-    slug: "fraud-risk-scorer",
+    slug: "trustlane",
     index: "02",
+    kicker: "Agentic decisioning · Thresholds derived, not searched",
+    name: "Trustlane",
+    repo: "https://github.com/srdataml-droid/trustlane",
+    problem:
+      "A KYC queue has to say approve, review or reject, and each of those costs something different — a missed fraud, a real customer turned away, an analyst's hour. A model that only ranks well never tells you where to draw the lines.",
+    built:
+      "A pipeline that reads a submitted document, decides for itself which further checks are worth running, and returns a decision with every reason recorded. A learned risk prior adjusted by rules that are each individually capped, so no hand-written rule can quietly overrule the model.",
+    changed:
+      "Both thresholds follow in closed form from three cost assumptions instead of being swept on validation — and that is the whole result. The swept version shipped 0.980/0.980 and cost 900 on test, 113 worse than using no model at all. The derived one costs 745, catches 74 of 83 frauds, and turns away nobody.",
+    stats: [
+      { value: "0.8651", label: "PR-AUC, against 0.7633 for rules alone" },
+      { value: "74 of 83", label: "frauds caught, 0 customers wrongly rejected" },
+    ],
+    caveat:
+      "Evaluated on synthetic documents \u2014 real identity papers cannot go in a public repo. That makes it weaker evidence than the projects run on public data, and the numbers should be read as optimistic.",
+  },
+  {
+    slug: "fraud-risk-scorer",
+    index: "03",
     kicker: "Machine learning · Decisions priced in money",
     name: "Fraud Risk Scorer",
     repo: "https://github.com/srdataml-droid/fraud-risk-scorer",
@@ -138,7 +163,7 @@ export const projects: Project[] = [
   },
   {
     slug: "sql-agent",
-    index: "03",
+    index: "04",
     kicker: "Language models · Tool-calling, under guard",
     name: "SQL Agent",
     repo: "https://github.com/srdataml-droid/sql-agent",
@@ -155,22 +180,23 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "trip-eta-predictor",
-    index: "04",
-    kicker: "Machine learning · Answering in time to be useful",
-    name: "Trip ETA Predictor",
-    repo: "https://github.com/srdataml-droid/trip-eta-predictor",
+    slug: "jobscout",
+    index: "05",
+    kicker: "Applied ML · Live postings, not a saved dataset",
+    name: "JobScout",
+    repo: "https://github.com/srdataml-droid/jobscout",
     problem:
-      "A dispatcher quoting arrival times from a distance rule. Every minute it is wrong by is a customer who was told the wrong thing.",
+      "Job boards are full of roles a Nigeria-based junior cannot actually get: wrong region, wrong seniority, or a title that says junior over a body asking for five years.",
     built:
-      "A gradient-boosted model over 52,627 trips, using only what is known when the trip is requested. The fare and dropoff fields that quietly give away the answer were dropped, and the split is by time, not at random.",
+      "Four public job APIs, no keys and no accounts, then three gates before anything is scored — geography, relevance, and a logistic regression on seniority with hard vetoes above it. What survives is ranked against a written profile, and the skills the market keeps asking for that the profile lacks are named.",
     changed:
-      "The quote is 48.5% closer than the rule it replaces, and it comes back fast enough to give while the customer is still on the screen. Measured over 200 real requests, not in a notebook.",
+      "Geography alone cut 595 postings to 47. And the classifier became useful through the input rather than the model: fed the requirement sentences instead of the advert's opening marketing, the same postings spread from a useless 0.38\u20130.51 to 0.40\u20130.72. Feature extraction bought more than any model change would have.",
     stats: [
-      { value: "2.80 min", label: "average error, 6.14 at the 90th percentile" },
-      { value: "9.2 ms", label: "median response" },
-      { value: "200", label: "real requests measured" },
+      { value: "595 \u2192 47", label: "postings surviving the geography gate" },
+      { value: "210 MB", label: "peak memory, trains in under a second, no GPU" },
     ],
+    caveat:
+      "A small model on 90 hand-labelled postings. The 92% cross-validated accuracy flatters it; scores near 0.5 mean undecided, and the posting should be read.",
   },
 ];
 
