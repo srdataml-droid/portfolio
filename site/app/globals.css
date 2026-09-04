@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Light is the base declaration and dark is the override, so a colour is never
+ * defined only inside a media query. The heading gradient is not simply
+ * inverted between the two: the dark ramp (#646973 → #BBCCD7) disappears
+ * against white, so light gets its own dark-to-mid ramp instead.
+ */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --surface-2: #eef2f6;
+  --line: #dde3e9;
+  --ink: #14181d;
+  --ink-soft: #3c454f;
+  --muted: #5a6572;
+  --faint: #9aa5b1;
+
+  --grad-head: linear-gradient(180deg, #2f3742 0%, #6e7a88 100%);
+  --grad-accent: linear-gradient(123deg, #18011f 7%, #b600a8 37%, #7621b0 72%, #be4c00 100%);
+  --accent-ring: rgba(20, 24, 29, 0.85);
+  --accent-shadow: rgba(181, 1, 167, 0.2);
+
+  /* The bright full-bleed break. In light mode the rhythm inverts, so the
+     section that is white in dark mode becomes the dark one here. */
+  --break-bg: #0c0c0c;
+  --break-ink: #d7e2ea;
+  --break-muted: #7a8590;
+  --break-line: rgba(215, 226, 234, 0.16);
+
+  --phase-a: rgba(118, 33, 176, 0.07);
+  --phase-b: rgba(190, 76, 0, 0.05);
+}
+
+.dark {
+  --bg: #0c0c0c;
+  --surface: #101318;
+  --surface-2: #161a20;
+  --line: #22262e;
+  --ink: #d7e2ea;
+  --ink-soft: #b9c4ce;
+  --muted: #7a8590;
+  --faint: #4f5866;
+
+  --grad-head: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
+  --accent-ring: rgba(255, 255, 255, 0.9);
+  --accent-shadow: rgba(181, 1, 167, 0.25);
+
+  --break-bg: #ffffff;
+  --break-ink: #14181d;
+  --break-muted: #5a6572;
+  --break-line: rgba(20, 24, 29, 0.14);
+
+  --phase-a: rgba(118, 33, 176, 0.16);
+  --phase-b: rgba(24, 1, 31, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  /* The page must never scroll sideways; the drifting rows are wider than the
+     viewport by design and are clipped, not allowed to widen the document. */
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@layer components {
+  .head-gradient {
+    background: var(--grad-head);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .accent-pill {
+    background: var(--grad-accent);
+    box-shadow:
+      0 4px 4px var(--accent-shadow),
+      inset 4px 4px 12px #7721b1;
+    outline: 2px solid var(--accent-ring);
+    outline-offset: -3px;
+    color: #ffffff;
+  }
+
+  /* Both drifting rows dissolve into the page at each edge rather than being
+     chopped off by the viewport. */
+  .edge-fade {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  }
+}
