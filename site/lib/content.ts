@@ -27,6 +27,7 @@ export const whatsappHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComp
 
 export const nav = [
   { label: "Work", href: "#work" },
+  { label: "Services", href: "#services" },
   { label: "Approach", href: "#approach" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -68,9 +69,24 @@ export const results = [
 
 export type Stat = { value: string; label: string };
 
+/**
+ * How a project came to exist. This distinction is load-bearing: work someone
+ * else needed is different evidence from work I set myself, and blurring them
+ * is the thing that gets caught in an interview. Both belong on the page —
+ * labelled.
+ */
+export type Category = "client" | "mine" | "craft";
+
+export const CATEGORY_LABEL: Record<Category, string> = {
+  client: "Someone else had this problem",
+  mine: "I had this problem, and it runs",
+  craft: "Built to get good at something specific",
+};
+
 export type Project = {
   slug: string;
   index: string;
+  category: Category;
   kicker: string;
   name: string;
   repo: string;
@@ -102,7 +118,8 @@ export const projects: Project[] = [
   {
     slug: "bodman-outfits",
     index: "01",
-    kicker: "Live platform · A real business in Lagos",
+    category: "client",
+    kicker: "Live platform · A tailoring business in Lagos",
     name: "Bodman Outfits",
     repo: "https://github.com/srdataml-droid/Bodman-Outfits",
     problem:
@@ -110,7 +127,7 @@ export const projects: Project[] = [
     built:
       "A full platform: catalogue, commissioning form, appointment requests, an order pipeline, and an admin the shop actually runs. Next.js and NestJS over Postgres.",
     changed:
-      "Every enquiry now arrives as a record with a deadline attached, and the customer gets told when their garment is ready. It is live, and it is used.",
+      "The problem was never the missing automation \u2014 it was that information moved between people by hand and nothing kept a record. Every enquiry now arrives as a row with a deadline attached, and the customer gets told when their garment is ready.",
     stats: [
       { value: "13", label: "migrations, applied live with no downtime" },
       { value: "3", label: "request types, one review queue" },
@@ -118,17 +135,74 @@ export const projects: Project[] = [
     priceFromNaira: 25000,
   },
   {
-    slug: "trustlane",
+    slug: "rccg-mount-zion",
     index: "02",
+    category: "client",
+    kicker: "Live platform · A church in Lagos",
+    name: "RCCG Mount Zion",
+    repo: "https://github.com/srdataml-droid/RCCG-mount-zion",
+    problem:
+      "Events, giving and meeting requests handled by hand, each one arriving as a message somebody had to remember to act on.",
+    built:
+      "An events calendar, a giving flow, meeting and connect forms, and an admin the church runs itself. React and Vite over Supabase, with one Express server that serves the API and the built front end together.",
+    changed:
+      "The decision that mattered was the boring one. A static host would have served every page perfectly and returned 404 for every API route \u2014 so the church information, the events, the giving accounts and all four forms would have failed quietly. It runs on a host that runs Node, deliberately, and the reasoning is written down rather than remembered.",
+    stats: [
+      { value: "4", label: "forms, one admin behind them" },
+      { value: "$0", label: "hosting budget, and the design respects it" },
+    ],
+  },
+  {
+    slug: "prospector",
+    index: "03",
+    category: "mine",
+    kicker: "Autonomous worker · Refusal-first research",
+    name: "Prospector",
+    repo: "https://github.com/srdataml-droid/prospector",
+    problem:
+      "Finding clients meant reading company websites one at a time and guessing which of them had a problem worth my time.",
+    built:
+      "A scheduled worker that reads a company\u2019s own site, extracts observations that each carry the sentence they came from, decides whether an opportunity is worth naming, and drafts the outreach. How far it may go is a database column \u2014 research only, design a solution, or build the prototype. Deploying anything is deliberately not on that ladder.",
+    changed:
+      "Every stage can come back empty, and empty is a result. A researcher that invents one fact about a company has saved you nothing, because now you have to check all of them. It surfaces real prospects with quoted evidence; none have converted into clients yet.",
+    stats: [
+      { value: "0", label: "guessed email addresses \u2014 the address must appear on their own site" },
+      { value: "1 pass", label: "per cron trigger, idempotent, safe to run forever" },
+    ],
+  },
+  {
+    slug: "jobscout",
+    index: "04",
+    category: "mine",
+    kicker: "Applied ML · Live postings, not a saved dataset",
+    name: "JobScout",
+    repo: "https://github.com/srdataml-droid/jobscout",
+    problem:
+      "Job boards are full of roles a Nigeria-based junior cannot actually get: wrong region, wrong seniority, or a title that says junior over a body asking for five years.",
+    built:
+      "Four public job APIs, no keys and no accounts, then three gates before anything is scored \u2014 geography, relevance, and a logistic regression on seniority with hard vetoes above it. What survives is ranked against a written profile.",
+    changed:
+      "Geography alone cut 595 postings to 47. And the classifier became useful through its input rather than its architecture: fed the requirement sentences instead of the advert\u2019s opening marketing, the same postings spread from a useless 0.38\u20130.51 to 0.40\u20130.72.",
+    stats: [
+      { value: "595 \u2192 47", label: "postings surviving the geography gate" },
+      { value: "210 MB", label: "peak memory, trains in under a second, no GPU" },
+    ],
+    caveat:
+      "A small model on 90 hand-labelled postings. The 92% cross-validated accuracy flatters it; scores near 0.5 mean undecided, and the posting should be read.",
+  },
+  {
+    slug: "trustlane",
+    index: "05",
+    category: "craft",
     kicker: "Agentic decisioning · Thresholds derived, not searched",
     name: "Trustlane",
     repo: "https://github.com/srdataml-droid/trustlane",
     problem:
-      "A KYC queue has to say approve, review or reject, and each of those costs something different — a missed fraud, a real customer turned away, an analyst's hour. A model that only ranks well never tells you where to draw the lines.",
+      "A KYC queue has to say approve, review or reject, and each of those costs something different \u2014 a missed fraud, a real customer turned away, an analyst\u2019s hour. A model that only ranks well never tells you where to draw the lines.",
     built:
       "A pipeline that reads a submitted document, decides for itself which further checks are worth running, and returns a decision with every reason recorded. A learned risk prior adjusted by rules that are each individually capped, so no hand-written rule can quietly overrule the model.",
     changed:
-      "Both thresholds follow in closed form from three cost assumptions instead of being swept on validation — and that is the whole result. The swept version shipped 0.980/0.980 and cost 900 on test, 113 worse than using no model at all. The derived one costs 745, catches 74 of 83 frauds, and turns away nobody.",
+      "Both thresholds follow in closed form from three cost assumptions instead of being swept on validation \u2014 and that is the whole result. The swept version shipped 0.980/0.980 and cost 900 on test, 113 worse than using no model at all. The derived one costs 745, catches 74 of 83 frauds, and turns away nobody.",
     stats: [
       { value: "0.8651", label: "PR-AUC, against 0.7633 for rules alone" },
       { value: "74 of 83", label: "frauds caught, 0 customers wrongly rejected" },
@@ -137,33 +211,9 @@ export const projects: Project[] = [
       "Evaluated on synthetic documents \u2014 real identity papers cannot go in a public repo. That makes it weaker evidence than the projects run on public data, and the numbers should be read as optimistic.",
   },
   {
-    slug: "fraud-risk-scorer",
-    index: "03",
-    kicker: "Machine learning · Decisions priced in money",
-    name: "Fraud Risk Scorer",
-    repo: "https://github.com/srdataml-droid/fraud-risk-scorer",
-    problem:
-      "Reviewing a flagged transaction costs an analyst's time whether or not there is fraud behind it. A model scored at 0.5 ignores that entirely.",
-    built:
-      "Set the alert threshold by cost rather than by probability — analyst time on one side, fraud value on the other — across 284,807 transactions where 0.172% were fraud.",
-    changed:
-      "150 of 211 frauds caught from only 163 alerts, at 55.1% of the cost of reviewing everything. Drift was checked with PSI so I would know when it stops holding.",
-    stats: [{ value: "0.75", label: "PR-AUC" }],
-    comparison: {
-      caption: "Cost of the two policies",
-      // The Kaggle card-fraud amounts are anonymised, so converting them into
-      // a real currency would invent precision the data never had.
-      footnote:
-        "Loss + labour, in the dataset's own units. Not converted — the amounts are anonymised.",
-      bars: [
-        { value: "12,067", label: "cost-based threshold", weight: 0.29, accent: true },
-        { value: "420,063", label: "reviewing every transaction", weight: 1 },
-      ],
-    },
-  },
-  {
     slug: "sql-agent",
-    index: "04",
+    index: "06",
+    category: "craft",
     kicker: "Language models · Tool-calling, under guard",
     name: "SQL Agent",
     repo: "https://github.com/srdataml-droid/sql-agent",
@@ -172,33 +222,24 @@ export const projects: Project[] = [
     built:
       "Three layers between the model and the data: a read-only connection with an authorizer whitelist, a guard that caps rows and makes refusals readable, and a six-step budget so it cannot loop forever.",
     changed:
-      "It answers 16 of 17 questions correctly and refuses all three attacks, with the database checksum unchanged afterwards. The benchmark needed fixing first — it was failing six answers that were right.",
+      "It answers 16 of 17 questions correctly and refuses all three attacks, with the database checksum unchanged afterwards. The benchmark needed fixing first \u2014 it was failing six answers that were right.",
     stats: [
       { value: "0.941", label: "execution accuracy" },
       { value: "3 of 3", label: "safety attacks refused" },
       { value: "0", label: "bytes of the database changed" },
     ],
   },
-  {
-    slug: "jobscout",
-    index: "05",
-    kicker: "Applied ML · Live postings, not a saved dataset",
-    name: "JobScout",
-    repo: "https://github.com/srdataml-droid/jobscout",
-    problem:
-      "Job boards are full of roles a Nigeria-based junior cannot actually get: wrong region, wrong seniority, or a title that says junior over a body asking for five years.",
-    built:
-      "Four public job APIs, no keys and no accounts, then three gates before anything is scored — geography, relevance, and a logistic regression on seniority with hard vetoes above it. What survives is ranked against a written profile, and the skills the market keeps asking for that the profile lacks are named.",
-    changed:
-      "Geography alone cut 595 postings to 47. And the classifier became useful through the input rather than the model: fed the requirement sentences instead of the advert's opening marketing, the same postings spread from a useless 0.38\u20130.51 to 0.40\u20130.72. Feature extraction bought more than any model change would have.",
-    stats: [
-      { value: "595 \u2192 47", label: "postings surviving the geography gate" },
-      { value: "210 MB", label: "peak memory, trains in under a second, no GPU" },
-    ],
-    caveat:
-      "A small model on 90 hand-labelled postings. The 92% cross-validated accuracy flatters it; scores near 0.5 mean undecided, and the posting should be read.",
-  },
 ];
+
+/**
+ * The conviction that runs through five of these projects. It was not designed
+ * as a positioning statement — it is what the code already does, named after
+ * the fact.
+ */
+export const thesis = {
+  headline: "Most systems built on a language model are designed to always produce an answer. Mine are designed to refuse.",
+  body: "A researcher that invents one fact about a company has saved you nothing, because now you have to check all of them. So every stage can come back empty, and empty is a result. It shows up as a read-only connection and a loop budget in the SQL agent, as refusal measured in both directions in the documentation RAG, as a schema that triggers a repair instead of shipping something wrong in the extractor, as bounded rules that cannot overrule the model in Trustlane, and as a quoted sentence behind every claim in Prospector. The guardrail is the product. The model is the easy half.",
+} as const;
 
 export const approach = [
   {

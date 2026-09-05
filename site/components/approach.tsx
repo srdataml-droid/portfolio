@@ -1,6 +1,6 @@
 "use client";
 
-import { approach } from "@/lib/content";
+import { approach, thesis } from "@/lib/content";
 import { Reveal } from "@/components/motion";
 
 /**
@@ -15,19 +15,31 @@ export function Approach() {
       className="scroll-mt-20 rounded-t-[32px] px-4 py-20 sm:rounded-t-[44px] sm:px-8 sm:py-24 md:rounded-t-[56px] md:px-14 md:py-28"
       style={{ background: "var(--break-bg)", color: "var(--break-ink)" }}
     >
-      <Reveal className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end md:gap-14">
+      <Reveal className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end lg:gap-14">
         <h2 className="m-0 text-[16vw] font-black uppercase leading-[0.9] tracking-[-0.03em] sm:text-[12vw] md:text-[132px]">
           Approach
         </h2>
         <p
-          className="m-0 max-w-[430px] text-base font-light leading-relaxed [text-wrap:pretty] md:mb-4 md:text-[17px]"
+          className="m-0 max-w-[430px] text-base font-light leading-relaxed [text-wrap:pretty] lg:mb-4 md:text-[17px]"
           style={{ color: "var(--break-muted)" }}
         >
           Five things I do, and the reason each one matters more than it looks.
         </p>
       </Reveal>
 
-      <ul className="mt-14 flex list-none flex-col p-0 md:mt-20">
+      <Reveal className="mt-14 flex flex-col gap-6 md:mt-20 md:max-w-[860px]" delay={0.05}>
+        <p className="m-0 text-xl font-medium leading-snug [text-wrap:pretty] md:text-[28px]">
+          {thesis.headline}
+        </p>
+        <p
+          className="m-0 text-[15px] font-light leading-relaxed [text-wrap:pretty] md:text-base"
+          style={{ color: "var(--break-muted)" }}
+        >
+          {thesis.body}
+        </p>
+      </Reveal>
+
+      <ul className="mt-14 flex list-none flex-col p-0 md:mt-16">
         {approach.map((item, index) => (
           <Reveal
             as="li"

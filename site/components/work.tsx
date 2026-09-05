@@ -1,6 +1,6 @@
 "use client";
 
-import { projects, type Project } from "@/lib/content";
+import { CATEGORY_LABEL, projects, type Project } from "@/lib/content";
 import { Reveal } from "@/components/motion";
 import { Money } from "@/components/currency";
 
@@ -64,6 +64,9 @@ function Card({ project }: { project: Project }) {
             {project.index}
           </span>
           <div className="flex flex-col gap-2 pt-1">
+            <span className="text-[11px] font-normal uppercase tracking-[0.2em] text-faint">
+              {CATEGORY_LABEL[project.category]}
+            </span>
             <span className="text-[11px] font-normal uppercase tracking-[0.2em] text-muted">
               {project.kicker}
             </span>
@@ -149,8 +152,9 @@ export function Work() {
 
       <Reveal className="mt-10 flex items-center gap-5" delay={0.1}>
         <span className="text-sm font-light text-faint [text-wrap:pretty]">
-          More on GitHub &mdash; a trip-ETA service, a demand forecaster, a documentation RAG
-          service, a job-advert extractor and an AI collections system.
+          More on GitHub &mdash; a local-first multi-agent runtime, a trip-ETA service, a demand
+          forecaster, a documentation RAG service, a job-advert extractor and an AI collections
+          system.
         </span>
         <div className="hidden h-px flex-1 bg-line sm:block" />
       </Reveal>
