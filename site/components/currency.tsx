@@ -50,9 +50,12 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
       }
     })();
 
-    async function boot() {
-      // Rates first: without them nothing can be converted, so there is no
-      // point asking where the visitor is.
+    // The two lookups answer different questions and must not be chained.
+    // Rates decide whether one naira figure can be converted; the country
+    // decides which price ladder the services section shows. An outage at the
+    // rate provider used to take the country answer down with it, which showed
+    // a visitor in Chicago a naira price list.
+    async function loadRates() {
       try {
         const response = await fetch(`https://open.er-api.com/v6/latest/${BASE}`);
         if (!response.ok) return;
@@ -60,14 +63,16 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
         if (cancelled || !payload.rates) return;
         setRates(payload.rates);
       } catch {
-        return;
+        // No rates means no conversion. It does not mean no prices.
       }
+    }
 
+    async function loadCurrency() {
+      // A stored choice is the visitor's own answer and outranks the guess.
       if (stored) {
         if (!cancelled) setCurrencyState(stored);
         return;
       }
-
       try {
         const response = await fetch("/api/geo");
         if (!response.ok) return;
@@ -79,7 +84,8 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    void boot();
+    void loadRates();
+    void loadCurrency();
     return () => {
       cancelled = true;
     };
@@ -126,11 +132,11 @@ export function Money({ naira }: { naira: number }) {
 }
 
 export function CurrencyPicker() {
-  const { currency, setCurrency, rates, offered } = useCurrency();
+  const { currency, setCurrency, offered } = useCurrency();
 
-  // Nothing to pick between until rates are in hand.
-  if (!rates) return null;
-
+  // Always offered. It sets the price ladder as well as the conversion, so it
+  // stays useful even when the rate provider is unreachable — the one figure
+  // that needs converting simply stays in naira and says so.
   return (
     <label className="flex items-center gap-3">
       <span className="text-[13px] font-light text-faint">Figures shown in</span>

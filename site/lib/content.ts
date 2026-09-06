@@ -21,8 +21,15 @@ export const site = {
   education: "OND Computer Science, Yaba College of Technology",
 } as const;
 
+/**
+ * The hero sets the full name as a two-line block, each line sized so both
+ * lines end flush at the right edge. The split lives here with the copy rather
+ * than in the layout, so changing the name never means editing a component.
+ */
+export const heroLines = ["Irenikase", "Samuel Temitope"] as const;
+
 export const whatsappHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-  "Hi Samuel — I have a problem I'd like to talk through",
+  `Hi ${site.shortName} — I have a problem I'd like to talk through`,
 )}`;
 
 export const nav = [

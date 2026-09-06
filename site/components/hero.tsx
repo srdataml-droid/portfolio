@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { nav, site, whatsappHref } from "@/lib/content";
+import { heroLines, nav, site, whatsappHref } from "@/lib/content";
 import { ThemeToggle } from "@/components/theme";
 
 const ease = [0.25, 0.1, 0.25, 1] as const;
@@ -78,10 +78,31 @@ export function Hero() {
         </nav>
       </Entrance>
 
-      <div className="pointer-events-none absolute inset-x-4 top-[22%] sm:inset-x-8 md:inset-x-14 md:top-[18%]">
-        <Entrance delay={0.15} y={36}>
-          <h1 className="head-gradient m-0 whitespace-nowrap text-[14vw] font-black uppercase leading-[0.86] tracking-[-0.035em] sm:text-[15vw] md:text-[16vw] lg:text-[17vw]">
-            Hi, I&rsquo;m {site.shortName}
+      <div className="pointer-events-none absolute inset-x-4 top-[19%] z-10 sm:inset-x-8 md:inset-x-14 md:top-[15%]">
+        <Entrance delay={0.15} y={36} className="flex flex-col gap-2 sm:gap-3">
+          <span className="text-[10px] font-medium uppercase tracking-[0.28em] text-muted sm:text-xs md:text-sm">
+            Hi, I&rsquo;m
+          </span>
+          {/*
+            Two lines, two sizes, both flush to the right edge. The content box
+            is ~92vw at every breakpoint (the padding grows roughly in step with
+            the viewport), so a single vw size per line holds from 320 to 1440
+            without a breakpoint ladder. The second line carries six more
+            characters, hence the smaller size.
+          */}
+          <h1 className="head-gradient m-0 flex flex-col font-black uppercase leading-[0.84] tracking-[-0.035em]">
+            {heroLines.map((line, index) => (
+              <span
+                key={line}
+                className={
+                  index === 0
+                    ? "block whitespace-nowrap text-[15.9vw]"
+                    : "block whitespace-nowrap text-[9.4vw]"
+                }
+              >
+                {line}
+              </span>
+            ))}
           </h1>
         </Entrance>
       </div>
