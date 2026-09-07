@@ -11,8 +11,8 @@ npm run build    # production build
 npm run typecheck
 ```
 
-Deploys to Vercel with no configuration — the one dynamic route is
-`/api/geo`, which runs on the edge.
+Deploys to Vercel with no configuration. Every route is static — there is no
+server code left in it.
 
 ## Where the content lives
 
@@ -28,12 +28,12 @@ cannot be pointed at in a repo, it does not appear on the site.
 
 | Section | File | Note |
 |---|---|---|
-| Hero | `components/hero.tsx` | Portrait is a placeholder silhouette |
+| Hero | `components/hero.tsx` | Full name over the character |
 | Evidence strip | `components/evidence-strip.tsx` | Two rows drifting on scroll |
-| Work | `components/work.tsx` | Four case studies, problem → built → changed |
+| Work | `components/work.tsx` | Six case studies, problem → built → changed |
 | Approach | `components/approach.tsx` | The inverted full-bleed section |
 | About | `components/about.tsx` | |
-| Contact | `components/contact.tsx` | Email, WhatsApp, socials, currency picker |
+| Contact | `components/contact.tsx` | Email, WhatsApp, socials |
 
 ## Themes
 
@@ -63,17 +63,19 @@ before first paint, so the page never renders in the wrong theme and snaps.
   start at `opacity: 0`, and without that failsafe a JS failure would leave a
   blank page rather than an unanimated one.
 
-## Currency
+## The character
 
-Only figures genuinely denominated in a currency are converted — currently the
-one catalogue price. `/api/geo` reads the country from the host's edge headers
-(no third-party service, nothing stored) to pick a sensible default, and the
-picker in the footer overrides it, because IP guesses wrong constantly.
+`public/character.png` is cropped out of the original render, then feathered
+with an elliptical alpha falloff so it dissolves into the page rather than
+sitting in a rectangle. Two details matter if it is ever regenerated: the
+source has a caption burnt into its bottom edge that must be cropped away, and
+the padding around the crop has to carry the edge pixels outward rather than
+being filled flat — a flat fill shows as a straight seam right where the fade
+is still half opaque.
 
-The fraud project's costs are **deliberately not converted**: those amounts are
-the dataset's own anonymised units, and the card says so. If the rate fetch or
-the country lookup fails, everything falls back to naira and the picker hides
-itself — a broken exchange rate must never become a wrong number on the page.
+On the light theme it is rendered at 90% opacity. The render is lit for a dark
+room, and at full strength a near-black shape on near-white reads as a hole in
+the page rather than someone standing in it.
 
 ## Verified
 
@@ -83,5 +85,4 @@ Built and driven in Chromium before shipping: no horizontal overflow at 320,
 
 ## Still open
 
-- The 3D portrait render, once a reference photo exists.
 - The FastAPI live-demo widget, deferred to a later phase.

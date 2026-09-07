@@ -122,14 +122,12 @@ Shipping something a business depends on teaches things a dataset cannot:
 | `CV.md` | The current CV |
 | `Irenikase_Samuel_Temitope_CV.pdf` | The same, as a PDF |
 
-`site/` cannot be served by GitHub Pages: it has an edge route behind the
-currency display, so it needs a host that runs code. It is deployed to Vercel
-at the link above. Everything in it is data-driven from `site/lib/content.ts`,
-so changing what the site claims never means editing layout.
+`site/` is deployed to Vercel at the link above. Everything in it is
+data-driven from `site/lib/content.ts`, so changing what the site claims never
+means editing layout.
 
 ## What is still open
 
-- A 3D portrait for the hero — the slot is built, the render is not.
 - A live "try it" demo for one of the LLM projects, behind FastAPI.
 - The three of the six not yet written up as case studies on the new site:
   the demand forecaster, the docs RAG service and the job extractor.

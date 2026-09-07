@@ -2,7 +2,14 @@
 
 import { CATEGORY_LABEL, projects, type Project } from "@/lib/content";
 import { Reveal } from "@/components/motion";
-import { Money } from "@/components/currency";
+
+/** The one naira-denominated figure on the page, shown in the currency it is
+ *  actually quoted in. */
+const nairaFormat = new Intl.NumberFormat("en-NG", {
+  style: "currency",
+  currency: "NGN",
+  maximumFractionDigits: 0,
+});
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
@@ -114,7 +121,7 @@ function Card({ project }: { project: Project }) {
           <div className="flex items-baseline gap-2 rounded-2xl bg-surface-2 px-5 py-3">
             <span className="text-[13px] font-light text-muted">Catalogue from</span>
             <span className="text-lg font-medium text-ink">
-              <Money naira={project.priceFromNaira} />
+              {nairaFormat.format(project.priceFromNaira)}
             </span>
           </div>
         ) : null}

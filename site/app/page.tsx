@@ -1,7 +1,6 @@
 import { Hero } from "@/components/hero";
 import { EvidenceStrip } from "@/components/evidence-strip";
 import { Work } from "@/components/work";
-import { Pricing } from "@/components/pricing";
 import { Approach } from "@/components/approach";
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
@@ -14,7 +13,6 @@ export default function Page() {
       <Hero />
       <EvidenceStrip />
       <Work />
-      <Pricing />
       <Approach />
       <About />
       <Contact />

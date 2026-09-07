@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { heroLines, nav, site, whatsappHref } from "@/lib/content";
 import { ThemeToggle } from "@/components/theme";
@@ -32,27 +33,23 @@ function Entrance({
 }
 
 /**
- * The portrait slot. A placeholder silhouette until the 3D render exists —
- * deliberately a drawn shape rather than a stock photo, so nothing on the page
- * is standing in for the real thing while pretending not to be.
+ * The character, feathered into the page rather than framed. The source is
+ * lit for a dark room, so on the light theme it is dimmed slightly and its
+ * contrast pulled back — otherwise a near-black shape on near-white reads as
+ * a hole punched in the page rather than someone standing in it.
  */
-function PortraitPlaceholder() {
+function Character() {
   return (
-    <div className="relative w-[280px] sm:w-[360px] md:w-[440px] lg:w-[500px]">
-      <svg viewBox="0 0 452 566" className="h-auto w-full" fill="none" role="img" aria-label="Portrait placeholder">
-        <defs>
-          <linearGradient id="portrait-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--line)" />
-            <stop offset="100%" stopColor="var(--bg)" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M226 96c46 0 78 34 78 82 0 30-9 55-23 72 34 13 60 30 78 52 26 32 39 76 45 130 3 26 4 44 4 62H70c0-18 1-36 4-62 6-54 19-98 45-130 18-22 44-39 78-52-14-17-23-42-23-72 0-48 32-82 52-82z"
-          fill="url(#portrait-fill)"
-          stroke="var(--line)"
-          strokeWidth="1.5"
-        />
-      </svg>
+    <div className="relative w-[290px] sm:w-[380px] md:w-[470px] lg:w-[540px]">
+      <Image
+        src="/character.png"
+        alt="Irenikase Samuel Temitope, illustrated"
+        width={940}
+        height={996}
+        priority
+        sizes="(min-width: 1024px) 540px, (min-width: 768px) 470px, (min-width: 640px) 380px, 290px"
+        className="h-auto w-full select-none opacity-90 dark:opacity-100"
+      />
     </div>
   );
 }
@@ -107,9 +104,13 @@ export function Hero() {
         </Entrance>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center">
+      {/* On a phone the viewport is tall and narrow, so anchoring him to the
+          bottom edge put him underneath the tagline and the button. He sits in
+          the gap between the name and that row instead, and only takes the
+          bottom edge once there is width to spare. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-[24%] flex justify-center sm:bottom-0">
         <Entrance delay={0.55} y={28}>
-          <PortraitPlaceholder />
+          <Character />
         </Entrance>
       </div>
 

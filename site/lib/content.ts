@@ -34,7 +34,6 @@ export const whatsappHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComp
 
 export const nav = [
   { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
   { label: "Approach", href: "#approach" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -102,9 +101,8 @@ export type Project = {
   changed: string;
   stats: Stat[];
   /**
-   * A genuinely naira-denominated figure, so it is the one number on the site
-   * that the currency picker converts. Taken from the catalogue's confirmed
-   * per-category starting prices, not estimated.
+   * A genuinely naira-denominated figure, shown as quoted. Taken from the
+   * catalogue's confirmed per-category starting prices, not estimated.
    */
   priceFromNaira?: number;
   /**

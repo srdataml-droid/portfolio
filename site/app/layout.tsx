@@ -3,7 +3,6 @@ import { Kanit } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/content";
 import { ThemeProvider, themeBootScript } from "@/components/theme";
-import { CurrencyProvider } from "@/components/currency";
 
 const kanit = Kanit({
   subsets: ["latin"],
@@ -47,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
-          <CurrencyProvider>{children}</CurrencyProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

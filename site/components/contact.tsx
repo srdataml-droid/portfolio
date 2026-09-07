@@ -2,7 +2,6 @@
 
 import { site, whatsappHref } from "@/lib/content";
 import { Reveal } from "@/components/motion";
-import { CurrencyPicker } from "@/components/currency";
 
 const links = [
   { label: "GitHub", href: site.github },
@@ -80,12 +79,9 @@ export function Contact() {
 
         <div className="h-px bg-line" />
 
-        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-          <span className="text-[13px] font-light text-faint">
-            {site.name} &mdash; {site.location}
-          </span>
-          <CurrencyPicker />
-        </div>
+        <span className="text-[13px] font-light text-faint">
+          {site.name} &mdash; {site.location}
+        </span>
       </div>
     </footer>
   );
